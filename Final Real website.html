@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Professional Website</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f0f4f8;
+    color: #333;
+}
+
+/* Header */
+header {
+    background: linear-gradient(90deg, #0077cc, #005fa3);
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+header h1 {
+    display: inline-block;
+}
+
+/* Mobile Menu Button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+
+/* Navigation Menu */
+nav {
+    background-color: #005fa3;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+nav ul li {
+    margin: 0 15px;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+nav ul li a:hover {
+    color: #ffbb33;
+}
+
+/* Hero Banner */
+#hero {
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+}
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+.hero-slide.active {
+    opacity: 1;
+}
+.hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.hero-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+.hero-text h2 { font-size: 36px; margin-bottom: 10px; }
+.hero-text p { font-size: 18px; }
+
+/* Sections */
+section { padding: 50px 20px; text-align: center; opacity: 0; transform: translateY(30px); transition: opacity 1s, transform 1s; }
+section.visible { opacity: 1; transform: translateY(0); }
+section h2 { margin-bottom: 20px; color: #0077cc; }
+
+/* Card Containers */
+.card-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
+.card { background-color: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 250px; transition: transform 0.3s, box-shadow 0.3s; }
+.card img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+.card h3 { margin-bottom: 10px; color: #005fa3; }
+.card p { font-size: 14px; color: #555; }
+.card:hover { transform: translateY(-15px) scale(1.05); box-shadow: 0 12px 25px rgba(0,0,0,0.25); }
+
+/* Testimonials */
+.testimonial-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
+.testimonial { background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 6px 12px rgba(0,0,0,0.1); width: 250px; text-align: center; transition: transform 0.3s, box-shadow 0.3s; }
+.testimonial:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.2); }
+.testimonial p { font-style: italic; margin-bottom: 10px; }
+.testimonial h4 { color: #0077cc; }
+
+/* Forms */
+.contact-form, .newsletter-form { display: flex; flex-direction: column; max-width: 500px; margin: 0 auto; gap: 10px; }
+.contact-form input, .contact-form textarea, .newsletter-form input { padding: 10px; border-radius: 5px; border: 1px solid #ccc; font-size: 16px; }
+.contact-form button, .newsletter-form button { padding: 12px; background-color: #0077cc; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background 0.3s; }
+.contact-form button:hover, .newsletter-form button:hover { background-color: #005fa3; }
+
+/* Footer */
+footer { background: linear-gradient(90deg, #005fa3, #0077cc); color: white; text-align: center; padding: 20px 0; }
+.footer-links { list-style: none; display: flex; justify-content: center; gap: 15px; margin-top: 10px; }
+.footer-links li a { color: white; text-decoration: none; transition: color 0.3s; }
+.footer-links li a:hover { color: #ffdd57; }
+
+/* Back to Top */
+#backToTop { position: fixed; bottom: 30px; right: 30px; padding: 12px 18px; font-size: 18px; background-color: #0077cc; color: white; border: none; border-radius: 50px; cursor: pointer; display: none; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: background-color 0.3s, transform 0.3s; }
+#backToTop:hover { background-color: #005fa3; transform: translateY(-3px); }
+
+/* Sticky Sidebar */
+#stickySidebar { position: fixed; top: 50%; left: 0; transform: translateY(-50%); background-color: #0077cc; padding: 10px; border-radius: 0 10px 10px 0; z-index: 1000; }
+#stickySidebar ul { list-style: none; padding: 0; margin: 0 0 15px 0; }
+#stickySidebar ul li { margin: 10px 0; }
+#stickySidebar ul li a { color: white; text-decoration: none; font-weight: bold; display: block; padding: 5px 10px; border-radius: 5px; transition: background 0.3s, color 0.3s; }
+#stickySidebar ul li a:hover { background-color: #005fa3; color: #ffdd57; }
+.social-icons { display: flex; flex-direction: column; gap: 10px; }
+.social-icons a { color: white; font-size: 20px; text-decoration: none; transition: color 0.3s; }
+.social-icons a:hover { color: #ffdd57; }
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .menu-toggle { display: block; }
+    nav ul { flex-direction: column; display: none; }
+    nav ul.show { display: flex; }
+    .card-container, .testimonial-container { flex-direction: column; align-items: center; }
+    .hero-text h2 { font-size: 28px; }
+    .hero-text p { font-size: 16px; }
+    .footer-links { flex-direction: column; gap: 5px; }
+    .newsletter-form { flex-direction: column; align-items: center; }
+    #stickySidebar { display: none; }
+}
+</style>
+</head>
+<body>
+
+    <!-- Sticky Sidebar -->
+    <div id="stickySidebar">
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="social-icons">
+            <a href="#" target="_blank">🐦</a>
+            <a href="#" target="_blank">📘</a>
+            <a href="#" target="_blank">📸</a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <h1>My Website</h1>
+        <button class="menu-toggle">☰</button>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section id="hero">
+        <div class="hero-slide active">
+            <img src="banner1.jpg" alt="Banner 1">
+            <div class="hero-text">
+                <h2>Welcome to Our Company</h2>
+                <p>Providing quality services for your success.</p>
+            </div>
+        </div>
+        <div class="hero-slide">
+            <img src="banner2.jpg" alt="Banner 2">
+            <div class="hero-text">
+                <h2>Creative Solutions</h2>
+                <p>We help your business grow and shine online.</p>
+            </div>
+        </div>
+        <div class="hero-slide">
+            <img src="banner3.jpg" alt="Banner 3">
+            <div class="hero-text">
+                <h2>Professional Team</h2>
+                <p>Experienced professionals ready to serve you.</p>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Us</h2>
+            <p>We provide the best services to our clients with 100% satisfaction guaranteed.</p>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services">
+            <h2>Our Services</h2>
+            <div class="card-container">
+                <div class="card">
+                    <img src="service1.jpg" alt="Service 1">
+                    <h3>Web Design</h3>
+                    <p>Modern and responsive websites for your business.</p>
+                </div>
+                <div class="card">
+                    <img src="service2.jpg" alt="Service 2">
+                    <h3>SEO Optimization</h3>
+                    <p>Improve your website ranking on Google and attract more clients.</p>
+                </div>
+                <div class="card">
+                    <img src="service3.jpg" alt="Service 3">
+                    <h3>Digital Marketing</h3>
+                    <p>Grow your business with targeted social media and ads.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery">
+            <h2>Our Work</h2>
+            <div class="card-container">
+                <div class="card"><img src="project1.jpg" alt="Project 1"></div>
+                <div class="card"><img src="project2.jpg" alt="Project 2"></div>
+                <div class="card"><img src="project3.jpg" alt="Project 3"></div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials">
+            <h2>What Our Clients Say</h2>
+            <div class="testimonial-container">
+                <div class="testimonial">
+                    <p>"Amazing service! Our website looks fantastic."</p>
+                    <h4>- John Doe</h4>
+                </div>
+                <div class="testimonial">
+                    <p>"Professional team and fast delivery. Highly recommended!"</p>
+                    <h4>- Jane Smith</h4>
+                </div>
+                <div class="testimonial">
+                    <p>"Our business grew thanks to their creative solutions."</p>
+                    <h4>- Mark Wilson</h4>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section id="newsletter">
+            <h2>Subscribe to Our Newsletter</h2>
+            <p>Get the latest updates directly to your inbox.</p>
+            <form action="#" method="post" class="newsletter-form">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Fill out the form below and we will get back to you soon!</p>
+            <form action="#" method="post" class="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2025 My Website. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop">↑ Top</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
