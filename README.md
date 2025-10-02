@@ -27,6 +27,7 @@ This is my personal website project. It showcase my work,services and gallery
 
 5 Contact
 - Email: kasahunt69@gmail.com
+- Email: kassahuntesfaye155@gmail.com
 - Phone: +251939521420
 
 ---
