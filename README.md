@@ -23,7 +23,7 @@ This is my personal website project. It showcase my work,services and gallery
 4 Technologies Used
 - HTML
 - CSS
-  - JavaScript
+- JavaScript
 
 5 Contact
 - Email: kasahunt69@gmail.com
